@@ -4,11 +4,12 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 import socket
 import json
+import conf
 
-consumer_key = 'r62C17ySHXRQaAp7RMtqzDCkl'
-consumer_secret = 'jiiRnwjPOK9R8JoynffRscDfryZnuVSAMC6IYvWsIlN7DqAhtH'
-access_token = '1238297637155004416-emRZwrNbkNo1H1tm3FsjfADlovnRjU'
-access_secret = '96FFVmKVAbMKG3W25Mk838HXr6Wsc6VpBRcAuDXoxxPoI'
+consumer_key = conf.consumer_key
+consumer_secret = conf.consumer_secret
+access_token = conf.access_token
+access_secret = conf.access_secret
 
 
 class TweetsListener(StreamListener):
