@@ -1,8 +1,8 @@
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, streaming
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.sql import functions as F
-from textblob import TextBlob
+# from textblob import TextBlob
 from pyspark.ml import Pipeline
 from sparknlp.annotator import *
 from sparknlp.base import *
@@ -24,12 +24,12 @@ def preprocessing(lines):
 # text classification
 
 
-def polarity_detection(text):
-    return TextBlob(text).sentiment.polarity
+# def polarity_detection(text):
+#     return TextBlob(text).sentiment.polarity
 
 
-def subjectivity_detection(text):
-    return TextBlob(text).sentiment.subjectivity
+# def subjectivity_detection(text):
+#     return TextBlob(text).sentiment.subjectivity
 
 
 # def text_classification(words):
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     words = words.repartition(1)
 
     query = words.writeStream.queryName("all_tweets")\
-        .outputMode("append").format("json")\
+        .outputMode("append").format("csv")\
         .option("path", "./parc")\
         .option("checkpointLocation", "./check")\
         .trigger(processingTime='60 seconds').start()
